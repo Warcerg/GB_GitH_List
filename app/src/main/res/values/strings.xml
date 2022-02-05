@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GB_GitH_List</string>
+    <string name="users_list">Users List</string>
+    <string name="language">Language</string>
+    <string name="repo_description">Repository description</string>
+    <string name="repo_name">Repository name</string>
+    <string name="user">User</string>
+    <string name="full_name">Full name</string>
 </resources>
