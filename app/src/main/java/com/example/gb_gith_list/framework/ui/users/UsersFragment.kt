@@ -8,12 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.gb_gith_list.R
 import com.example.gb_gith_list.databinding.UsersFragmentBinding
 import com.example.gb_gith_list.framework.App
 import com.example.gb_gith_list.framework.ui.ViewModelFactory
 import com.example.gb_gith_list.framework.ui.adapters.UserListAdapter
+import com.example.gb_gith_list.framework.ui.profile.ProfileFragment
 import com.example.gb_gith_list.model.AppState
-import com.example.gb_gith_list.model.repository.Repository
+import com.example.gb_gith_list.model.entities.User
 
 class UsersFragment: Fragment() {
 
@@ -44,11 +46,26 @@ class UsersFragment: Fragment() {
     }
 
     private fun renderData(appState: AppState) = with(viewBinding) {
-        when(appState) {
+        when (appState) {
             is AppState.Error -> TODO()
             is AppState.Loading -> TODO()
-            is AppState.Success -> {
-                adapter = UserListAdapter(appState.users)
+            is AppState.SuccessUsersList -> {
+                adapter = UserListAdapter(appState.users, object : OnItemClickListener {
+                    override fun onItemViewClick(user: User) {
+                        val managerFR = activity?.supportFragmentManager
+                        managerFR?.let { manager ->
+                            val bundle = Bundle().apply {
+                                putParcelable(ProfileFragment.BUNDLE_EXTRA, user)
+                            }
+                            manager.beginTransaction()
+                                .add(R.id.container, ProfileFragment.newInstance(bundle))
+                                .addToBackStack("")
+                                .remove(this@UsersFragment)
+                                .commitAllowingStateLoss()
+                        }
+                    }
+                }
+                )
                 recyclerViewUsersList.adapter = adapter
             }
         }
@@ -63,5 +80,9 @@ class UsersFragment: Fragment() {
 
     companion object {
         fun newInstance() = UsersFragment()
+    }
+
+    interface OnItemClickListener {
+        fun onItemViewClick(user: User)
     }
 }
