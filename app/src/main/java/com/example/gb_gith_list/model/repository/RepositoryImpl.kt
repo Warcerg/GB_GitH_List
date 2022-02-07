@@ -9,12 +9,14 @@ class RepositoryImpl: Repository {
 
     override fun getUsers(): List<User> {
         val usersList = mutableListOf<User>()
-        for (i in 1..5){
+        val userLogins = User.getDefaultUsers()
+        for (user in userLogins) {
+            val dto = GitRepositoryDataRepo.API.getUserInfo(user).execute().body()
             usersList.add(
                 User(
-                    login = "warcerg",
-                    avatar = "https://avatars.githubusercontent.com/u/81096228?v=4",
-                    fullName = "Andrey Efremov"
+                    login = dto?.login ?: "",
+                    avatar = dto?.avatar ?: "",
+                    fullName = dto?.fullName ?: ""
                 )
             )
         }

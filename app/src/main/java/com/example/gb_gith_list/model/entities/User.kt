@@ -10,4 +10,10 @@ data class User (
     val avatar: String = "",
     val fullName: String = ""
 ) : Parcelable {
+
+    companion object{
+        fun getDefaultUsers() = listOf<String>("Warcerg", "borhammere", "kirich1409", "defunkt")
+    }
 }
+
+

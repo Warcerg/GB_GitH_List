@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.CreateMethod
@@ -47,9 +48,10 @@ class UsersFragment: Fragment() {
 
     private fun renderData(appState: AppState) = with(viewBinding) {
         when (appState) {
-            is AppState.Error -> TODO()
-            is AppState.Loading -> TODO()
+            is AppState.Error ->  Toast.makeText(context, getString(R.string.error), Toast.LENGTH_SHORT).show()
+            is AppState.Loading -> progressBar.visibility = View.VISIBLE
             is AppState.SuccessUsersList -> {
+                progressBar.visibility = View.INVISIBLE
                 adapter = UserListAdapter(appState.users, object : OnItemClickListener {
                     override fun onItemViewClick(user: User) {
                         val managerFR = activity?.supportFragmentManager

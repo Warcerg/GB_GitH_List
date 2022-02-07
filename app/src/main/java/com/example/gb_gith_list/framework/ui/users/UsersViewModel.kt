@@ -17,7 +17,7 @@ class UsersViewModel(private val repository: Repository): ViewModel(), Lifecycle
         getUsersDataFromLocal()
 
     private fun getUsersDataFromLocal() {
-/*        liveDataToObserve.value = AppState.Loading*/
+        liveDataToObserve.value = AppState.Loading
         Thread {
             Thread.sleep(SLEEPVALUE)
             liveDataToObserve.postValue(AppState.SuccessUsersList(repository.getUsers()))

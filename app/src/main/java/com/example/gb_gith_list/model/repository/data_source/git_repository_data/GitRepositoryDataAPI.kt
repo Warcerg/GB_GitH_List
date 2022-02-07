@@ -13,7 +13,7 @@ interface GitRepositoryDataAPI {
         @Path("username") username: String
     ): Call<List<UserRepositoryDTO>>
 
-    @GET("{username}/")
+    @GET("{username}")
     fun getUserInfo(
         @Path("username") username: String
     ): Call<UserDTO>

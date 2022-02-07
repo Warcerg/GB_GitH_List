@@ -20,7 +20,7 @@ class ProfileViewModel(private val repository: Repository): ViewModel(), Lifecyc
 
 
     private fun getRepoListDataFromServer(user: User) {
-/*        liveDataToObserve.value = AppState.Loading*/
+        liveDataToObserve.value = AppState.Loading
         Thread {
             Thread.sleep(SLEEPVALUE)
             liveDataToObserve.postValue(AppState.SuccessUserRepoList(repository.getUserRepoList(user)))
