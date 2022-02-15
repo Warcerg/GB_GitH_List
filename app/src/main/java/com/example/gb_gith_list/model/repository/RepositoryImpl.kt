@@ -1,8 +1,11 @@
 package com.example.gb_gith_list.model.repository
 
+import android.text.format.Time
 import com.example.gb_gith_list.model.entities.User
 import com.example.gb_gith_list.model.entities.UserRepository
 import com.example.gb_gith_list.model.repository.data_source.git_repository_data.GitRepositoryDataRepo
+import io.reactivex.rxjava3.core.Single
+import java.util.concurrent.TimeUnit
 
 class RepositoryImpl: Repository {
 
@@ -40,4 +43,9 @@ class RepositoryImpl: Repository {
         }
         return repoList.toList()
     }
+
+    override val userListSingle: Single<List<User>>
+        get() = Single.timer(3, TimeUnit.SECONDS).map { getUsers() }
+
+
 }

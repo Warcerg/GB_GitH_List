@@ -49,9 +49,13 @@ class UsersFragment: Fragment() {
     private fun renderData(appState: AppState) = with(viewBinding) {
         when (appState) {
             is AppState.Error ->  Toast.makeText(context, getString(R.string.error), Toast.LENGTH_SHORT).show()
-            is AppState.Loading -> progressBar.visibility = View.VISIBLE
+            is AppState.Loading -> {
+                recyclerViewUsersList.visibility = View.INVISIBLE
+                progressBar.visibility = View.VISIBLE
+            }
             is AppState.SuccessUsersList -> {
                 progressBar.visibility = View.INVISIBLE
+                recyclerViewUsersList.visibility = View.VISIBLE
                 adapter = UserListAdapter(appState.users, object : OnItemClickListener {
                     override fun onItemViewClick(user: User) {
                         val managerFR = activity?.supportFragmentManager
