@@ -9,4 +9,6 @@ interface Repository {
     fun getUserRepoList(user: User): List<UserRepository>
 
     val userListSingle: Single<List<User>>
+
+    fun getSingleUserRepoList(user: User): Single<List<UserRepository>>
 }
