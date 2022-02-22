@@ -4,9 +4,8 @@ import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
 object ApiUtils {
-    private val baseUrlMainPart = "https://api.github.com/"
-    private val baseUrlUsers = "users/"
-    val baseUrl = "$baseUrlMainPart$baseUrlUsers"
+    private const val BASE_URL = "https://api.github.com/"
+    fun getBaseUrl() = BASE_URL
 
     fun getOkHTTPBuilder(): OkHttpClient {
         val httpClient = OkHttpClient.Builder()
@@ -24,4 +23,6 @@ object ApiUtils {
 
         return httpClient.build()
     }
+
+
 }

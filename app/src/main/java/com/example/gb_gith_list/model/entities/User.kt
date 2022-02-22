@@ -2,13 +2,14 @@ package com.example.gb_gith_list.model.entities
 
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class User (
-    val login: String = "",
-    val avatar: String = "",
-    val fullName: String = ""
+    @field:SerializedName("login")  val login: String = "",
+    @field:SerializedName("avatar_url") val avatar: String = "",
+    @field:SerializedName("name") val fullName: String = ""
 ) : Parcelable {
 
     companion object{
